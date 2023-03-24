@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Enemy/Enemy_Flying.gd" type="Script" id=1]
+[ext_resource path="res://Assets/enemy_flying.png" type="Texture" id=2]
+
+[sub_resource type="CapsuleShape2D" id=55]
+radius = 28.0
+height = 16.0
+
+[node name="Enemy_Flying" type="KinematicBody2D"]
+position = Vector2( 1000, 125 )
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 18, -28.1, 18, -25.7, 24, -17.7, 24, 6.2, 25.4, 7.5, 24.3, 10, 23.7, 10, 21.7, 23, 19.7, 23, 9.1, 32, -9.3, 32, -22, 22, -22, 18.3, -25, 8.3, -25, 1.9, -23.9, -19, -22.5, -19, -20.6, -27, -18.7, -27, -12, -32, 12.1, -32 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, -1 )
+shape = SubResource( 55 )
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
